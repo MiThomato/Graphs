@@ -1,4 +1,6 @@
-#### Example usage of custom colors for graphs
+##### Below are two examples for usage of custom colors for graphs; one for patapoints (dp) and one for bar graphs (bars).
+
+#### Example usage of custom colors for overlaying individual datapoints:
 
 ### Libraries
 import matplotlib.pyplot as plt
@@ -58,4 +60,65 @@ for i, loc in enumerate(locations):
 fig.tight_layout()
 plt.suptitle('Mean Juiciness and Individual Datapoints of Apples and Oranges')
 plt.legend(loc='upper right')
+plt.show()
+
+
+
+def get_bar_cols_greens(num_colors=3, alpha=1.0):
+    """
+    Returns a list of custom colors with alpha for use in plots.
+
+    Args:
+        num_colors (int): Number of colors to return, can be 1, 2, or 3.
+        alpha (float): The alpha value for the colors, ranging from 0 (transparent) to 1 (opaque).
+
+    Returns:
+        list: A list of RGBA color strings.
+    """
+    bar_cols_greens = [
+        f"#{int(155 * alpha + (1 - alpha) * 255):02x}{int(191 * alpha + (1 - alpha) * 255):02x}{int(125 * alpha + (1 - alpha) * 255):02x}",
+        f"#{int(111 * alpha + (1 - alpha) * 255):02x}{int(174 * alpha + (1 - alpha) * 255):02x}{int(111 * alpha + (1 - alpha) * 255):02x}",
+        f"#{int(46 * alpha + (1 - alpha) * 255):02x}{int(119 * alpha + (1 - alpha) * 255):02x}{int(71 * alpha + (1 - alpha) * 255):02x}"
+    ]
+    
+    if num_colors == 1:
+        colors = [bar_cols_greens[0]]
+    elif num_colors == 2:
+        colors = [bar_cols_greens[0], bar_cols_greens[1]]
+    elif num_colors == 3:
+        colors = bar_cols_greens
+    else:
+        raise ValueError("num_colors must be 1, 2, or 3.")
+    
+    return colors
+   
+print(f"The get_bar_cols_greens function now includes a num_colors parameter which determines how many colors to return.\n"
+      f"Depending on the value of num_colors, the function returns a sublist of bar_cols_greens containing 1, 2, or 3 colors.")
+
+
+
+######################################################################
+
+
+
+#### Example usage of bar colors equivalent to Seaborn's YlGn palette:
+
+## Example usage:
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Define sample data
+categories = ['Category 1', 'Category 2', 'Category 3']
+values = np.random.randint(1, 10, size=len(categories))
+colors = get_bar_cols_greens(num_colors=3, alpha=0.9)  
+
+# Plotting
+plt.figure(figsize=(8, 6))
+bars = plt.bar(categories, values, color=colors)
+
+# Add labels, title, and grid
+plt.title('Bar Plot with Custom Colors')
+plt.xlabel('Categories')
+plt.ylabel('Values')
+
 plt.show()
