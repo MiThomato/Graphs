@@ -12,41 +12,60 @@ r = requests.get(url)
 with open('dp_cols_green_tan.py', 'w') as f:
     f.write(r.text)
 
-## Step 2: Import the function and create an example graph
+# Step 2: Import the function
 from dp_cols_green_tan import get_dp_cols_green_tan
 
+def plot_mean_juiciness_with_datapoints(mean_juiciness, datapoints, categories, jitter=0.05):
+    """
+    Plots the mean juiciness for apples and oranges with individual datapoints.
+
+    Args:
+        mean_juiciness (dict): A dictionary with the mean juiciness for each fruit.
+        datapoints (dict): A dictionary with individual datapoints for each fruit and category.
+        categories (list): A list of categories for the datapoints.
+        jitter (float): The amount of jitter to add to the datapoints for better visualization.
+    """
+    # Get the custom colors
+    colors = get_dp_cols_green_tan(alpha=0.7)
+
+    # Create the bar plot
+    fig, ax = plt.subplots()
+    palette = sns.color_palette('YlGn', 2)
+    bar_positions = range(len(mean_juiciness))
+
+    ax.bar(bar_positions, mean_juiciness.values(), color=palette, tick_label=mean_juiciness.keys())
+
+    # Overlay the individual datapoints with jitter
+    for i, (fruit, data) in enumerate(datapoints.items()):
+        for j, category in enumerate(categories):
+            y_values = data[category]
+            x_values = np.random.normal(i, jitter, size=len(y_values))  # Add jitter to x-values
+            ax.scatter(x_values, y_values, color=colors[j], label=category if i == 0 else "")
+
+    # Add legend and labels
+    ax.legend(title='Location')
+    ax.set_xlabel('Fruit')
+    ax.set_ylabel('Juiciness')
+    ax.set_title('Mean Juiciness for Apples vs Oranges with Individual Data Points')
+
+    # Display the plot
+    plt.show()
+
 # Example data
-fruits = ['Apple', 'Orange']
-mean_juiciness = [6, 7]
+mean_juiciness = {'Apples': 7, 'Oranges': 6}
+datapoints = {
+    'Apples': {
+        'NY': [6, 7, 8, 7, 7, 8, 6, 9, 8, 7],
+        'NJ': [5, 7, 9, 8, 6, 7, 5, 8, 6, 7],
+        'DC': [6, 7, 8, 7, 8, 6, 7, 7, 6, 8]
+    },
+    'Oranges': {
+        'NY': [5, 6, 7, 6, 6, 7, 5, 7, 6, 7],
+        'NJ': [5, 6, 8, 6, 7, 6, 6, 7, 6, 8],
+        'DC': [6, 6, 7, 7, 7, 6, 6, 7, 6, 7]
+    }
+}
+categories = ['NY', 'NJ', 'DC']
 
-# Individual datapoints for juiciness
-apple_juiciness = [5, 6, 7, 6, 6]
-orange_juiciness = [6, 7, 8, 7, 6]
-
-# Custom colors for individual datapoints
-colors = get_dp_cols_green_tan(alpha=0.5)
-
-# Create the bar plot
-palette = sns.color_palette('YlGn', 2)
-fig, ax = plt.subplots()
-bars = ax.bar(fruits, mean_juiciness, color=palette)
-
-# Overlay the individual datapoints
-x_positions = np.array([0, 1])  # x positions for the bars
-
-# Jitter the datapoints around the bar positions for better visualization
-jitter_amount = 0.05
-x_jittered_apple = x_positions[0] + np.random.uniform(-jitter_amount, jitter_amount, len(apple_juiciness))
-x_jittered_orange = x_positions[1] + np.random.uniform(-jitter_amount, jitter_amount, len(orange_juiciness))
-
-ax.scatter(x_jittered_apple, apple_juiciness, color=colors[0], label='Apple datapoints')
-ax.scatter(x_jittered_orange, orange_juiciness, color=colors[1], label='Orange datapoints')
-
-# Adding labels and title
-ax.set_xlabel('Fruits')
-ax.set_ylabel('Juiciness (0-10)')
-ax.set_title('Mean Juiciness of Apples and Oranges with Individual Datapoints')
-ax.legend()
-
-# Show plot
-plt.show()
+# Plot the data with jitter
+plot_mean_juiciness_with_datapoints(mean_juiciness, datapoints, categories, jitter=0.1)
