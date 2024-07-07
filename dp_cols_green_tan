@@ -1,0 +1,14 @@
+def get_dp_cols_green_tan():
+    """
+    Returns a list of custom colors for use in plots.
+    
+    Returns:
+        list: A list of color strings.
+    """
+    dp_cols_green_tan = ['darkolivegreen', 'grey', 'tan']
+    return dp_cols_green_tan
+
+# Example usage:
+# import matplotlib.pyplot as plt
+# custom_colors_dp = get_dp_cols_green_tan()
+# plt.scatter(x, y, c=custom_colors_dp)
