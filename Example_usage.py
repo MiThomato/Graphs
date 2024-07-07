@@ -8,7 +8,7 @@ import numpy as np
 ### In case needed
 ## Step 0: Download the script from GitHub
 #import requests
-#url = 'https://raw.githubusercontent.com/MiThomato/graphs/main/dp_cols_green_tan.py'
+#url = 'https://raw.githubusercontent.com/MiThomato/Graphs/main/dp_cols_green_tan.py'
 #r = requests.get(url)
 #
 #with open('dp_cols_green_tan.py', 'w') as f:
