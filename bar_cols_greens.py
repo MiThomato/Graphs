@@ -34,11 +34,11 @@ print(f"The get_bar_cols_greens function now includes a num_colors parameter whi
 
 # Choose 2 colors
 custom_colors_bar = get_bar_cols_greens(num_colors=2, alpha=1)
-print(custom_colors_bar)  # ['#9ebf7d', '#6eae6f']
+print(custom_colors_bar) 
 
 # Choose all 3 colors with different alpha
 custom_colors_bar_alpha = get_bar_cols_greens(num_colors=3, alpha=1)
-print(custom_colors_bar_alpha)  # ['#7f9b5f', '#5d8c5d', '#3b5e47']
+print(custom_colors_bar_alpha) 
 
 # Using in a plot
 # plt.scatter(x, y, c=custom_colors_bar)
