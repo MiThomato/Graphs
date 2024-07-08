@@ -38,13 +38,13 @@ locations_data = np.random.choice(locations, size=n_points)
 fig, axs = plt.subplots(1, 2, figsize=(12, 6))
 
 # Bar plot for apples
-sns.barplot(x=locations_data, y=apples_mean_juiciness, palette=sns.color_palette('YlGn', 2), ax=axs[0])
+sns.barplot(x=locations_data, y=apples_mean_juiciness, palette=sns.color_palette('YlGn', 3), ax=axs[0])
 axs[0].set_title('Mean Juiciness of Apples')
 axs[0].set_xlabel('Locations')
 axs[0].set_ylabel('Mean Juiciness (0-10)')
 
 # Bar plot for oranges
-sns.barplot(x=locations_data, y=oranges_mean_juiciness, palette=sns.color_palette('YlGn', 2), ax=axs[1])
+sns.barplot(x=locations_data, y=oranges_mean_juiciness, palette=sns.color_palette('YlGn', 3), ax=axs[1])
 axs[1].set_title('Mean Juiciness of Oranges')
 axs[1].set_xlabel('Locations')
 axs[1].set_ylabel('Mean Juiciness (0-10)')
