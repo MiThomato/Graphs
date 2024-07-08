@@ -8,20 +8,13 @@ import seaborn as sns
 import numpy as np
 import requests
 
-### Part A
+### Part A.
 
 ## Step 0: Download the script from GitHub
 url = 'https://raw.githubusercontent.com/MiThomato/Graphs/main/dp_cols_green_tan.py'
-r = requests.get(url)
+response = requests.get(url)
+exec(response.text)
 
-with open('dp_cols_green_tan.py', 'w') as f:
-    f.write(r.text)
-
-from dp_cols_green_tan import get_dp_cols_green_tan
-colors = get_dp_cols_green_tan()
-
-## Step 1: Get custom colors
-from dp_cols_green_tan import get_dp_cols_green_tan
 colors = get_dp_cols_green_tan()
 
 ### Part B.
